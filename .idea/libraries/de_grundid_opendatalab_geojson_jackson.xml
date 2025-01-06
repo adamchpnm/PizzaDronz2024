@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="de.grundid.opendatalab.geojson.jackson" type="repository">
+    <properties maven-id="de.grundid.opendatalab:geojson-jackson:1.14" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/grundid/opendatalab/geojson-jackson/1.14/geojson-jackson-1.14.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
