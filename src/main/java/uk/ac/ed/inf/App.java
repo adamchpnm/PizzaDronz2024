@@ -45,14 +45,6 @@ public class App
      * @param args = commandline arguments
      */
 
-    public static void test(String[] args) throws MalformedURLException
-    {
-        System.out.println("Welcome to PizzaDronz flightpathing and logging system");
-
-        //Validate commandline arguments and get order date and URL
-        InputHandler inputs = new InputHandler(args);
-        LocalDate orderDate = inputs.getOrderDate();
-    }
     public static void main(String[] args ) throws MalformedURLException
     {
         System.out.println("Welcome to PizzaDronz flightpathing and logging system");
@@ -131,8 +123,14 @@ public class App
         System.out.println("----------------------------------\n" + "Orders processed successfully and routes generated: see results file for paths and processed orders");
     }
 
+
     public static void errorMessage(String message){
         System.err.println(message + ". Program terminating...");
         System.exit(1);
     }
+
+//    public static void main() throws MalformedURLException {
+//        String[] args = { "date", "url"};
+//        main(args);
+//    }
 }
