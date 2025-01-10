@@ -29,7 +29,7 @@ public class AppTest
 
 //    @Test
     public void mainRuns() throws MalformedURLException {
-        String[] args = { "date", "url"};
+        String[] args = { "2025-01-20", "https://ilp-rest-2024.azurewebsites.net/"};
         App.main(args);
         System.out.flush();
         assertTrue(true);

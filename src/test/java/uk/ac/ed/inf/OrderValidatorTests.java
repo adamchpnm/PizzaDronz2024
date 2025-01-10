@@ -64,7 +64,7 @@ public class OrderValidatorTests {
         System.out.println("Pass\n");
         resetTestOrder();
 
-        System.out.println("Checking for invalid expiry date(close to valid):");
+        System.out.println("Checking for invalid expiry date (close to valid):");
         invalidExpiry_CloseToValid();
         System.out.println("Pass\n");
         resetTestOrder();

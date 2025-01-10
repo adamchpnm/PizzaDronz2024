@@ -113,10 +113,9 @@ public class App
         for(Order currentOrder : orders){
             currentOrder = validator.validateOrder(currentOrder,filteredRestaurants);
             if(currentOrder.getOrderStatus() == OrderStatus.VALID_BUT_NOT_DELIVERED){
-//                System.out.println(currentOrder.getPizzasInOrder().length);
                 if (currentOrder.getPizzasInOrder().length != 0) {
                     List<LngLat> rawRoute = flightRouter.getRoute(restaurantsAndItems.get(currentOrder.getPizzasInOrder()[0]));
-                    //If route empty then no route was found for that restaurant, hence order wont be delivered even if valid
+                    //If none empty order or route empty (no route was found for that restaurant), order won't be delivered even if valid
                     if (!rawRoute.isEmpty()) {
                         route.addAll(rawRoute);
                         allMoves.addAll(new FlightPath(currentOrder.getOrderNo(), rawRoute, flightRouter.getGraph()).getProcessedRoute());
@@ -125,7 +124,7 @@ public class App
                 }
             }
         }
-        System.out.println("Generating results...");
+        System.out.println("Generating results files...");
         //Create and populate result files for Deliveries, Flightpath and Drone respectively
         fileGenerator.createFile(orders);
         fileGenerator.createFile(route,true);

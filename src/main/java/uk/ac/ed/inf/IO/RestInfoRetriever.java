@@ -97,8 +97,8 @@ public class RestInfoRetriever {
         if(obj.equals("Order")){
             jsonRead = jsonRead.replaceAll("VALID","VALID_BUT_NOT_DELIVERED");
             jsonRead = jsonRead.replaceAll("INVALID_BUT_NOT_DELIVERED","INVALID");
-            jsonRead = jsonRead.replaceAll("PRICE_FOR_PIZZA_INVALID","UNDEFINED");
-            jsonRead = jsonRead.replaceAll("EMPTY_ORDER","UNDEFINED");
+            jsonRead = jsonRead.replaceAll("PRICE_FOR_PIZZA_INVALID","TOTAL_INCORRECT");
+            jsonRead = jsonRead.replaceAll("EMPTY_ORDER","MAX_PIZZA_COUNT_EXCEEDED");
             return mapper.readValue(jsonRead, new TypeReference<ArrayList<Order>>(){});
         }
         else if(obj.equals("Restaurant")){

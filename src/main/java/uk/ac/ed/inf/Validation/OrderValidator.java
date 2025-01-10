@@ -114,11 +114,12 @@ public class OrderValidator implements uk.ac.ed.inf.ilp.interfaces.OrderValidati
         }
 
         //Check no other validation codes have been set and if not then order is error free
-        if(orderToValidate.getOrderValidationCode() == OrderValidationCode.UNDEFINED){
+        if(orderToValidate.getOrderValidationCode() == OrderValidationCode.UNDEFINED) {
             orderToValidate.setOrderValidationCode(OrderValidationCode.NO_ERROR);
-            orderToValidate.setOrderStatus(OrderStatus.VALID_BUT_NOT_DELIVERED);
         }
-        else{
+        if(orderToValidate.getOrderValidationCode() == OrderValidationCode.NO_ERROR){
+            orderToValidate.setOrderStatus(OrderStatus.VALID_BUT_NOT_DELIVERED);
+        } else{
             orderToValidate.setOrderStatus(OrderStatus.INVALID);
         }
         return orderToValidate;
