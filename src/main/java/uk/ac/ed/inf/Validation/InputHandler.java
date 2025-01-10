@@ -29,7 +29,7 @@ public class InputHandler {
         //Check date is in correct LocalDateTime format
         try{
 //            orderDate = LocalDate.parse(args[0]);
-            orderDate = LocalDate.parse("2025-01-06");
+            orderDate = LocalDate.parse("2025-01-10");
         }
         catch(DateTimeParseException e){
             errorMessage("Date not in Localdate format YYYY-MM-DD");

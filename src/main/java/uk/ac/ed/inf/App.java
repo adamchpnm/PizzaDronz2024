@@ -32,7 +32,8 @@ import java.util.*;
  */
 public class App 
 {
-    private static ArrayList<Order> orders;
+    private static ArrayList<Order> orders = new ArrayList<>();
+    private static ArrayList<Order> ordersAll;
     private static ArrayList<Restaurant> restaurants;
     private static ArrayList<NamedRegion> noZones;
     private static NamedRegion central;
@@ -53,7 +54,6 @@ public class App
         InputHandler inputs = new InputHandler(args);
         LocalDate orderDate = inputs.getOrderDate();
         URL url = inputs.getWebsite();
-//        URL url = new URL("https://ilp-rest-2024.azurewebsites.net/");
         final DayOfWeek day = orderDate.getDayOfWeek();
 
         // Create RestInformationRetriever object to obtain  data from the rest service
@@ -65,13 +65,24 @@ public class App
             restaurants = ((ArrayList<Restaurant>)retriever.jsonReader(new URL(url + "/restaurants"), "Restaurant"));
             noZones = ((ArrayList<NamedRegion>)retriever.jsonReader(new URL(url + "/noFlyZones"), "NamedRegion"));
             central = ((ArrayList<NamedRegion>) retriever.jsonReader(new URL(url + "/centralArea"), "Central")).get(0);
-            orders = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders"), "Order");
+            ordersAll = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders"), "Order");
 //            orders = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders/" + orderDate), "Order");
         }
         catch(Exception e){
             errorMessage("Incorrect URL for rest end point");
         }
         System.out.println("Connected to rest server");
+
+        //Filter for only orders on specified date
+        for (Order e: ordersAll) {
+            if (e.getOrderDate().equals(orderDate)){
+                orders.add(e);
+            }
+        }
+
+        if (orders.size() == 0){
+            System.err.println("No orders found for specified date. Result files will be empty");
+        }
 
         //Instantiate file creator with given order date
         FileCreator fileGenerator = new FileCreator(orderDate);

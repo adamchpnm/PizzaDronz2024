@@ -39,7 +39,9 @@ public class FileCreator {
         orderDate = date.toString();
         File temp = new File(System.getProperty("user.dir"));
         //Will write to outside target file when ran by jar so it is in main directory of project
-        basePath = temp.getParentFile().toString().concat("\\resultfiles");
+//        basePath = temp.getParentFile().toString().concat("\\resultfiles");
+        basePath = temp.toString().concat("\\resultfiles");
+//        basePath = "\\resultfiles";
         File resultsDir = new File(basePath);
         if (!resultsDir.exists()){
             resultsDir.mkdirs();
