@@ -38,9 +38,9 @@ public class AppTest
     @Test
     public void appEmpty() throws Exception{
         System.out.println("Checking app runs with empty day:" + ANSI_BLACK);
-        String[] empty = new String[]{"2000-01-01", "https://ilp-rest-2024.azurewebsites.net/"};
+        String[] empty = new String[]{"2025-01-01", "https://ilp-rest-2024.azurewebsites.net/"};
         App.main(empty);
-        System.out.println(ANSI_GREEN );
+        System.out.println(ANSI_GREEN);
         assertTrue(true);
     }
 

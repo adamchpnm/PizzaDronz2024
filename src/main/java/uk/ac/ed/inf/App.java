@@ -63,6 +63,7 @@ public class App
         retriever.connect(url);
 
         //Get data from respective endpoints
+        int count = 0;
         try {
             restaurants = ((ArrayList<Restaurant>)retriever.jsonReader(new URL(url + "/restaurants"), "Restaurant"));
             noZones = ((ArrayList<NamedRegion>)retriever.jsonReader(new URL(url + "/noFlyZones"), "NamedRegion"));
@@ -70,7 +71,7 @@ public class App
             ordersAll = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders"), "Order");
 //            orders = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders/" + orderDate), "Order");
         }
-        catch(Exception e){errorMessage("Incorrect URL for rest end point");}
+        catch(Exception e){errorMessage("Incorrect URL for rest end point: " + url + " " + count);}
         System.out.println("Connected to rest server");
 
         //Filter for only orders on specified date
