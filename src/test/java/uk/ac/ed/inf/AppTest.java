@@ -17,8 +17,9 @@ public class AppTest
 
     @Test
     public void everythingWorks() throws Exception {
+        System.out.println(ANSI_RESET + "Running all unit tests");
         allTestsPass();
-        System.out.println("----------------------------------\n" + ANSI_GREEN + "----------------------------------");
+        System.out.println("----------------------------------\n" + ANSI_RESET + "Running all system tests\n"+ ANSI_GREEN + "----------------------------------");
         appEmpty();
         appRuns();
         System.out.println(ANSI_GREEN + "\nAPP RUNS SUCCESSFULLY\n" + "----------------------------------\n"+ ANSI_RESET + "\nALL TESTS PASS");

@@ -379,10 +379,6 @@ public class OrderValidatorTests {
         return LocalDate.of(2025,1,day);
     }
 
-//    public static void main(String[] args){
-//        System.out.println(generateRandomDay());
-//    }
-
     public static String generateRandomDay() {
         LocalDate start = LocalDate.of(2000, Month.JANUARY, 1);
         LocalDate end = LocalDate.of(2024, Month.DECEMBER, 31);
