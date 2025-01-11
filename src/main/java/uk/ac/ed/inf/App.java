@@ -71,7 +71,7 @@ public class App
             ordersAll = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders"), "Order");
 //            orders = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders/" + orderDate), "Order");
         }
-        catch(Exception e){errorMessage("Incorrect URL for rest end point: " + url + " " + count);}
+        catch(Exception e){errorMessage("Incorrect URL for rest end point");}
         System.out.println("Connected to rest server");
 
         //Filter for only orders on specified date
