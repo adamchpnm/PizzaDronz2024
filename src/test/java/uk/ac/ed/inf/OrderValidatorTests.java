@@ -100,7 +100,7 @@ public class OrderValidatorTests {
         resetTestOrder();
 
         System.out.println("Checking for pizzas from the same restaurant:");
-        pizzasFromSameRestaraunt();
+        pizzasFromSameRestaurant();
         System.out.println("Pass\n");
         resetTestOrder();
 
@@ -230,7 +230,7 @@ public class OrderValidatorTests {
     }
 
     @Test
-    public void pizzasFromSameRestaraunt(){
+    public void pizzasFromSameRestaurant(){
         testOrder.setPizzasInOrder(Arrays.copyOfRange(pizzas,2,4));
         testOrder.setPriceTotalInPence(2600);
         testInstance.validateOrder(testOrder, restaurants);

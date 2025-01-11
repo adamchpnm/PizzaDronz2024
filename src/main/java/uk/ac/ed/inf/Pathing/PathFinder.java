@@ -112,7 +112,7 @@ public class PathFinder {
                         }
                     }
                     //Score each connection based off difference in distance to the goal, distance travelled so far and score in relation to
-                    // future no fly zones being in the way
+                    // future no-fly zones being in the way
                     double newScore = current.getRouteScore()  + (distanceScorer.distanceTo(current.getCurrent(),currentRestaurant.location()) - distanceScorer.distanceTo(nextNode.getCurrent(),currentRestaurant.location())) +
                             routeScorer.scoreNeighbour(nextNode.getCurrent(), currentRestaurant.location(),graph);
                     allNodes.put(connection, nextNode);

@@ -20,7 +20,7 @@ public class LngLatHandler implements LngLatHandling {
     }
 
     /**
-     * Returns result of if two coordinates are close to eachother ie within 0.00015 distance of eachother
+     * Returns result of if two coordinates are close to each other ie within 0.00015 distance of each other
      * @param startPosition = first coordinate to consider
      * @param otherPosition = coordinate that is compared to for closeness
      * @return boolean value indicating if the points are close

@@ -57,7 +57,7 @@ public class OrderValidator implements uk.ac.ed.inf.ilp.interfaces.OrderValidati
         int totalOrderCost = 0;
 
         //Flag for determining if the current pizza has been found within any of the restaurants menus
-        boolean pizzaExists = false;
+        boolean pizzaExists;
 
         //Variables to store the found restaurants opening hours (for later validation) and name
         DayOfWeek[] openingHours = null;
@@ -68,22 +68,21 @@ public class OrderValidator implements uk.ac.ed.inf.ilp.interfaces.OrderValidati
             //reset flag with each pizza iteration to ensure each pizza exists within defined restaurants
             pizzaExists = false;
             restaurantLoop:
-            for(int currentRestaurant = 0; currentRestaurant < definedRestaurants.length; currentRestaurant++){
-                for(int menuItem = 0; menuItem < definedRestaurants[currentRestaurant].menu().length; menuItem++){
-                    if(definedRestaurants[currentRestaurant].menu()[menuItem].name().equals(orderToValidate.getPizzasInOrder()[pizzaNumber].name())){
+            for (Restaurant definedRestaurant : definedRestaurants) {
+                for (int menuItem = 0; menuItem < definedRestaurant.menu().length; menuItem++) {
+                    if (definedRestaurant.menu()[menuItem].name().equals(orderToValidate.getPizzasInOrder()[pizzaNumber].name())) {
                         //Current pizza exists hence set flag to true
                         pizzaExists = true;
 
-                        //If current restaurant has not been found then assign it, else if current pizzas restaurant doesnt match previously assigned it must be
+                        //If current restaurant has not been found then assign it, else if current pizza's restaurant doesn't match previously assigned it must be
                         //from a different restaurant hence set validation code and break
-                        if(restaurant == null){
-                            restaurant = definedRestaurants[currentRestaurant].name();
-                        }
-                        else if(!restaurant.equals(definedRestaurants[currentRestaurant].name())){
+                        if (restaurant == null) {
+                            restaurant = definedRestaurant.name();
+                        } else if (!restaurant.equals(definedRestaurant.name())) {
                             orderToValidate.setOrderValidationCode(OrderValidationCode.PIZZA_FROM_MULTIPLE_RESTAURANTS);
                             break pizzaLoop;
                         }
-                        openingHours = definedRestaurants[currentRestaurant].openingDays();
+                        openingHours = definedRestaurant.openingDays();
 
                         //Break restaurant loop to get to next pizza as current pizza has been found
                         break restaurantLoop;

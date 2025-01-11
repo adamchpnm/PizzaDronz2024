@@ -46,7 +46,7 @@ public class RestInfoRetriever {
      * Reads JSON from the provided site and deserializes before returning an ArrayList of objects
      * @param site = the endpoint of the rest server intended to read and deserialize
      * @param obj = a string to classify what object to deserialize
-     * @return an arraylist of the object eg an arrayList of orders,restaurants or namedRegions
+     * @return an arraylist of the object e.g. an arrayList of orders,restaurants or namedRegions
      */
     public ArrayList<?> jsonReader(URL site, String obj) throws IOException {
         //Write all the JSON data into a string using a scanner
@@ -54,9 +54,7 @@ public class RestInfoRetriever {
         Scanner scanner = new Scanner(site.openStream());
         while (scanner.hasNext()) { jsonRead += scanner.nextLine(); }
         scanner.close();
-        /**
-         * Depending on object type, get mapper to deserialize and return arraylist of required objects
-         */
+        //Depending on object type, get mapper to deserialize and return arraylist of required objects
         if(obj.equals("Order")){
             jsonRead = jsonRead.replaceAll("VALID","VALID_BUT_NOT_DELIVERED");
             jsonRead = jsonRead.replaceAll("INVALID_BUT_NOT_DELIVERED","INVALID");
@@ -73,7 +71,8 @@ public class RestInfoRetriever {
         else{
             //Only need one NamedRegion - central
             ArrayList<NamedRegion>  temp = new ArrayList<>(1);
-            temp.add(mapper.readValue(jsonRead, new TypeReference<NamedRegion>(){}));
+            temp.add(mapper.readValue(jsonRead, new TypeReference<>() {
+            }));
             return temp;
         }
     }

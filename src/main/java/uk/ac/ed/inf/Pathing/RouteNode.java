@@ -49,20 +49,12 @@ public class RouteNode implements Comparable<RouteNode> {
     }
 
     /**
-     * Overriden compareTo - used in priority queue for ordering routenodes by estimated score
+     * Overridden compareTo - used in priority queue for ordering routenodes by estimated score
      * @return value indicating how the current routenodes estimated score compares to any routenode being compared to
      */
     @Override
     public int compareTo(RouteNode other) {
-        if(this.estimatedScore > other.estimatedScore){
-            return 1;
-        }
-        else if(this.estimatedScore < other.estimatedScore){
-            return -1;
-        }
-        else {
-            return 0;
-        }
+        return Double.compare(this.estimatedScore, other.estimatedScore);
     }
 
     public void setPrevious(LngLat node) {

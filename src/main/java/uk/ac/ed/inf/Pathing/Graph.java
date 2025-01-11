@@ -23,10 +23,10 @@ public class Graph{
     private static ArrayList<LngLat> allPoints = new ArrayList<>();
 
     /**
-     * Parameterised constructor for establishing no fly zones and obtaining restaurants
-     * @param regions list of no fly zones
-     * @param startPoint initial point drone will start from (appleton for now however left as a variable incase this changes
-     * @param restaurants list of restauants to have routes generated to
+     * Parameterised constructor for establishing no-fly zones and obtaining restaurants
+     * @param regions list of no-fly zones
+     * @param startPoint initial point drone will start from (appleton for now however left as a variable in case this changes
+     * @param restaurants list of restaurants to have routes generated to
      * @param centralRegion the defined central region area
      */
     public Graph(NamedRegion[]regions, LngLat startPoint, Restaurant[] restaurants, NamedRegion centralRegion){
@@ -55,10 +55,10 @@ public class Graph{
     public Set<LngLat> generateImmediateConnected(LngLat start, LngLat currentDestination, boolean lookahead){
         //Set for nodes used in search only
         Set<LngLat> connectedNodesForSearch= new HashSet<>();
-        HashMap<LngLat,Double> connected = new HashMap<LngLat, Double>();
+        HashMap<LngLat,Double> connected = new HashMap<>();
 
         //For all 16 possible directions the drone can move
-        for(Double angle = 0.0; angle < 360; angle+= 22.5){
+        for(double angle = 0.0; angle < 360; angle+= 22.5){
             LngLat nextConnection;
             //If being called by the simpleLineScorer for calculating the heuristic, use the handlers nextFarPosition
             if(lookahead){
@@ -130,7 +130,7 @@ public class Graph{
     /**
      * Creates a boundary using the extreme points from all points within graph and determines
      * if a given point is within that boundary - aids the search by keeping the nodes relevant to their destination
-     * @param coord = point to be cross referenced for if its within the boundary
+     * @param coord = point to be cross-referenced for if it's within the boundary
      * @return result of if point is outOfBounds or not
      */
     private boolean outOfBounds(LngLat coord){
@@ -164,7 +164,7 @@ public class Graph{
             return angle;
         }
         //Connections will contain parents and connectingNodes for the route *TO* the restaurant, not return, hence
-        //check if connections contains the parent first, if it doesnt then it's for the return route so swap parent and connecting
+        //check if connections contains the parent first, if it doesn't then it's for the return route so swap parent and connecting
         if(connections.containsKey(parentNode)){
             angle = connections.get(parentNode).get(connectingNode);
         }

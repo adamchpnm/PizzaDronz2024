@@ -86,12 +86,12 @@ public class App
 
         //Filter restaurants to only consider restaurants that are open that day
         Restaurant[] filteredRestaurants = Arrays
-                .stream(restaurants.toArray(new Restaurant[restaurants.size()]))
+                .stream(restaurants.toArray(new Restaurant[0]))
                 .filter(r-> Arrays.stream(r.openingDays()).toList().contains(day))
-                .toArray(size -> new Restaurant[size]);
+                .toArray(Restaurant[]::new);
 
         //Configure flightRouter with only valid restaurants and NamedRegions
-        PathFinder flightRouter = new PathFinder(filteredRestaurants, noZones.toArray(new NamedRegion[noZones.size()]), central);
+        PathFinder flightRouter = new PathFinder(filteredRestaurants, noZones.toArray(new NamedRegion[0]), central);
 
         //Generate route and store path for each restaurant
         System.out.println("Generating routes...");
@@ -104,7 +104,7 @@ public class App
         //Create map of all unique pizzas and their accompanying restaurant - used when obtaining restaurant for an order
         for(Restaurant restaurant: filteredRestaurants){
             List<Pizza> pizzas = new ArrayList(Arrays.stream(restaurant.menu()).toList());
-            pizzas.stream().forEach(p -> restaurantsAndItems.put(p, restaurant));
+            pizzas.forEach(p -> restaurantsAndItems.put(p, restaurant));
         }
 
         for(Order currentOrder : orders){

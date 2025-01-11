@@ -22,9 +22,7 @@ public class RetrieverTests {
         System.out.println("Checking with unavailable URL provided:");
         RestInfoRetriever retriever = new RestInfoRetriever();
         URL url = new URL("https://gogogoogogogog.com/");
-        Exception exception = assertThrows(Exception.class, () -> {
-            retriever.connect(url);
-        });
+        Exception exception = assertThrows(Exception.class, () -> retriever.connect(url));
         String expectedMessage = "Invalid URL entered - cannot be connected to";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
@@ -32,13 +30,10 @@ public class RetrieverTests {
     }
 
     @Test
-    public void wrongURL() throws Exception {
+    public void wrongURL() {
         System.out.println("Checking with wrong URL provided:"+ANSI_BLACK);
         String[] wrongURLargs = { "2025-01-20", "https://github.com/adamchpnm/PizzaDronz2024/"};
-        App app = new App();
-        Exception exception = assertThrows(Exception.class, () -> {
-            app.main(wrongURLargs);
-        });
+        Exception exception = assertThrows(Exception.class, () -> App.main(wrongURLargs));
         String expectedMessage = "Incorrect URL for rest end point";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));

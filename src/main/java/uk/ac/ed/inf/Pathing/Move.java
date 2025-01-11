@@ -1,7 +1,7 @@
 package uk.ac.ed.inf.Pathing;
 
 /**
- * Class representing each move the drone makes- stores orderNo the move is apart of, the previous coordinates, next coordinates and
+ * Class representing each move the drone makes- stores orderNo the move is a part of, the previous coordinates, next coordinates and
  * the angle between the coordinates
  */
 public class Move {

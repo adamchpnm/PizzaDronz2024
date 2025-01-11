@@ -37,7 +37,7 @@ public class RouteScorer {
 
         //Obtain distanced points from the current point in order to look ahead and order based off relevancy to restaurant
         Set<LngLat> nextPossibleMoves = currentMap.generateImmediateConnected(point,currentDestination,true);
-          nextPossibleMoves = nextPossibleMoves.stream().sorted(Comparator.comparingDouble(p -> currentCoordinateHandler.distanceTo((LngLat) p, currentDestination))).collect(toCollection(LinkedHashSet::new));
+          nextPossibleMoves = nextPossibleMoves.stream().sorted(Comparator.comparingDouble(p -> currentCoordinateHandler.distanceTo(p, currentDestination))).collect(toCollection(LinkedHashSet::new));
 
         //Only examine the 6 most relevant long distance nodes
         if(nextPossibleMoves.size() >6) { nextPossibleMoves = new LinkedHashSet<>(nextPossibleMoves.stream().toList().subList(0, 6)); }

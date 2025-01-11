@@ -31,8 +31,7 @@ public class AppTest
         //normal day
         System.out.println("Checking app runs normally:" + ANSI_BLACK);
         String[] args = { "2025-01-20", "https://ilp-rest-2024.azurewebsites.net/"};
-        App app = new App();
-        app.main(args);
+        App.main(args);
         System.out.println(ANSI_GREEN );
         assertTrue(true);
     }
@@ -41,8 +40,7 @@ public class AppTest
     public void appEmpty() throws Exception{
         System.out.println("Checking app runs with empty day:" + ANSI_BLACK);
         String[] empty = new String[]{"2000-01-01", "https://ilp-rest-2024.azurewebsites.net/"};
-        App app = new App();
-        app.main(empty);
+        App.main(empty);
         System.out.println(ANSI_GREEN );
         assertTrue(true);
     }

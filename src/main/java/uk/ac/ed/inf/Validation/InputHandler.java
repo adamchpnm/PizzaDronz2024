@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 import static uk.ac.ed.inf.App.errorMessage;
 
@@ -15,7 +14,6 @@ import static uk.ac.ed.inf.App.errorMessage;
 public class InputHandler {
     private static LocalDate orderDate;
     private static URL website;
-    private boolean error = false;
 
     /**
      * Constructor - will immediately validate arguments
@@ -27,8 +25,7 @@ public class InputHandler {
         //Check for number of arguments provided
         if(args.length == 0){
             System.err.println("No arguments provided. Will run with below default arguments:\nDate: "+LocalDate.now()+" (current date)\nWebsite: https://ilp-rest-2024.azurewebsites.net/ (default website)");
-            String[] temp = { LocalDate.now().toString(), "https://ilp-rest-2024.azurewebsites.net/"};
-            args = temp;
+            args = new String[]{ LocalDate.now().toString(), "https://ilp-rest-2024.azurewebsites.net/"};
         } else if(args.length!= 2) {
 //            throw new Exception("Incorrect number of arguments passed" + ". Program terminating...");
             errorMessage("Incorrect number of arguments passed");
