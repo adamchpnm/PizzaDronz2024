@@ -43,9 +43,7 @@ public class FileCreator {
         basePath = temp.toString().concat("\\resultfiles");
 //        basePath = "\\resultfiles";
         File resultsDir = new File(basePath);
-        if (!resultsDir.exists()){
-            resultsDir.mkdirs();
-        }
+        if (!resultsDir.exists()){resultsDir.mkdirs();}
 
         //Load custom serializer as a module for the object mapper; will allow mapper to serialise Orders as Deliveries
         SimpleModule module = new SimpleModule("CustomDeliverySerializer", new Version(1, 0, 0, null, null, null));
@@ -62,10 +60,7 @@ public class FileCreator {
         try {
             mapper.writeValue(new File(basePath.concat("\\deliveries-" + orderDate + ".json")), deliveries);
 
-        } catch (IOException e) {
-            System.err.println("Failed to write deliveries file");
-        }
-    }
+        } catch (IOException e) {System.err.println("Failed to write deliveries file");}}
     /**
      * Overloaded method - will serialize moves and write them to the flightpath file
      * @param moves = list of all moves for each order's flightpath
@@ -74,10 +69,7 @@ public class FileCreator {
         //Mapper serializes array of moves to json and writes to file
         try {
             mapper.writeValue(new File(basePath.concat("\\flightpath-" + orderDate + ".json")), moves);
-        } catch (IOException e) {
-            System.err.println("Failed to write flightpath file");
-        }
-    }
+        } catch (IOException e) {System.err.println("Failed to write flightpath file");}}
     /**
      * Overloaded method - will serialize coordinates and write them to the drone file
      * @param droneMoves = list of coordinates for each flightpath of each order
@@ -94,8 +86,5 @@ public class FileCreator {
             //Mapper serializes FeatureCollection and writes to file
             mapper.writeValue(new File(basePath.concat("\\drone-" + orderDate + ".geojson")), new FeatureCollection().add(mainFeature));
 
-        } catch (IOException e) {
-            System.err.println("Failed to write drone file");
-        }
-    }
+        } catch (IOException e) { System.err.println("Failed to write drone file");}}
 }

@@ -58,7 +58,15 @@ public class LngLatHandlingTests {
 
         System.out.println("Checking for the next point being correct (N):");
         nextPointCorrect_N();
-        System.out.println("Pass");
+        System.out.println("Pass\n");
+
+        System.out.println("Checking for multi-step point (heuristics) being correct (W):");
+        farPointCorrect_W();
+        System.out.println("Pass\n");
+
+        System.out.println("Checking for multi-step point (heuristics) being correct (S):");
+        farPointCorrect_S();
+        System.out.println("Pass\n");
     }
 
 
@@ -125,6 +133,20 @@ public class LngLatHandlingTests {
         LngLat oldPoint = new LngLat(3.11111,52.222222);
         LngLat newPoint = new LngLat(3.11111, 52.222372);
         assertEquals(testInstance.nextPosition(oldPoint, 90.00), newPoint);
+    }
+
+    @Test
+    public void farPointCorrect_W(){
+        LngLat oldPoint = new LngLat(3.11111,52.222222);
+        LngLat newPoint = new LngLat(3.11066, 52.222222);
+        assertEquals(testInstance.nextFarPosition(oldPoint, 180.00), newPoint);
+    }
+
+    @Test
+    public void farPointCorrect_S(){
+        LngLat oldPoint = new LngLat(3.11111,52.222222);
+        LngLat newPoint = new LngLat(3.11111, 52.221772);
+        assertEquals(testInstance.nextFarPosition(oldPoint, 270.00), newPoint);
     }
 
 }

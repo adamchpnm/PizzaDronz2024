@@ -33,19 +33,15 @@ public class RestInfoRetriever {
      * Establishes HTTP connection with the website by performing the get request
      * @param url = the provided url to the rest server
      */
-    public void connect(URL url){
+    public void connect(URL url) throws Exception {
         try{
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
-            if (conn.getResponseCode() != 200) {
-                throw new IOException("HttpResponseCode: " + conn.getResponseCode());
-            }
-        }
+            if (conn.getResponseCode() != 200) {throw new IOException("HttpResponseCode: " + conn.getResponseCode());}}
         catch(IOException e){
-            errorMessage("Invalid URL entered - cannot be connected to");
-        }
-    }
+//            throw new Exception("Invalid URL entered - cannot be connected to" + ". Program terminating...");}}
+            errorMessage("Invalid URL entered - cannot be connected to");}}
     /**
      * Reads JSON from the provided site and deserializes before returning an ArrayList of objects
      * @param site = the endpoint of the rest server intended to read and deserialize
@@ -56,44 +52,11 @@ public class RestInfoRetriever {
         //Write all the JSON data into a string using a scanner
         String jsonRead = "";
         Scanner scanner = new Scanner(site.openStream());
-        while (scanner.hasNext()) {
-            jsonRead += scanner.nextLine();
-//            System.out.println(jsonRead);
-        }
+        while (scanner.hasNext()) { jsonRead += scanner.nextLine(); }
         scanner.close();
-
-        //Remove all orders with the error "PRICE_FOR_PIZZA_INVALID" before parsing to order
-        //Each order is of the form: {"orderNo":"...","orderDate":"...","orderStatus":"...","orderValidationCode":"...","priceTotalInPence":2400,"pizzasInOrder":[...],"creditCardInformation":{...}}#
-        String toUse = "";
-        String toAdd = "";
-        int nester = 0;
-//        if (jsonRead.contains("orderNo")){
-//            for (char e: jsonRead.toCharArray()) {
-//                toAdd += e;
-//                if (e == '{'){
-//                    nester += 1;
-//                } else if (e == '}'){
-//                    nester -= 1;
-//                }
-//                if (nester == 0){
-//    //                System.out.println(toAdd);
-//                    if (!(toAdd.contains("PRICE_FOR_PIZZA_INVALID")||toAdd.contains("EMPTY_ORDER"))) {
-//                        toUse += toAdd;
-//                    } else {
-//                        toUse = toUse.substring(0, toUse.length() - 1);
-//                    }
-//                    toAdd = "";
-//
-//                }
-//
-//            }
-
-//            toUse.replaceAll("\n", "");
-//            toUse.replaceAll(",,", ",");
-//            System.out.println(jsonRead);
-//            System.out.println(toUse);
-//        }
-        //Depending on object type, get mapper to deserialize and return arraylist of required objects
+        /**
+         * Depending on object type, get mapper to deserialize and return arraylist of required objects
+         */
         if(obj.equals("Order")){
             jsonRead = jsonRead.replaceAll("VALID","VALID_BUT_NOT_DELIVERED");
             jsonRead = jsonRead.replaceAll("INVALID_BUT_NOT_DELIVERED","INVALID");

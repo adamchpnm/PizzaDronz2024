@@ -44,9 +44,7 @@ public class PathFinder {
                 route.addAll(returnRoute);
             }
             //If no route is found for that restaurant
-            catch(IllegalStateException e){
-                System.err.println("No route found for " + restaurant.name() + ", valid orders will not be delivered");
-            }
+            catch(IllegalStateException e){ System.err.println("No route found for " + restaurant.name() + ", valid orders will not be delivered"); }
             //Will continue routing for other restaurants but inform user of no route being found
             restaurantRoutes.put(restaurant.name(), route);
         }
@@ -132,11 +130,7 @@ public class PathFinder {
                     }
                 });
             }
-            catch (NullPointerException e){
-                 System.out.println("Failed generate more points ");
-            }
-        }
-        System.err.println("No viable route found");
-        throw new IllegalStateException();
+            catch (NullPointerException e){ System.out.println("Failed to generate more points "); }
+        } System.err.println("No viable route found"); throw new IllegalStateException();
     }
 }

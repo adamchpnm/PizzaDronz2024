@@ -40,9 +40,7 @@ public class RouteScorer {
           nextPossibleMoves = nextPossibleMoves.stream().sorted(Comparator.comparingDouble(p -> currentCoordinateHandler.distanceTo((LngLat) p, currentDestination))).collect(toCollection(LinkedHashSet::new));
 
         //Only examine the 6 most relevant long distance nodes
-        if(nextPossibleMoves.size() >6) {
-            nextPossibleMoves = new LinkedHashSet<>(nextPossibleMoves.stream().toList().subList(0, 6));
-        }
+        if(nextPossibleMoves.size() >6) { nextPossibleMoves = new LinkedHashSet<>(nextPossibleMoves.stream().toList().subList(0, 6)); }
 
         //For each of the 6, if any are close to any noFlyZones, increase score to deter from that path
         for(LngLat possibleMove: nextPossibleMoves) {

@@ -10,7 +10,6 @@ import uk.ac.ed.inf.Validation.OrderValidator;
 import uk.ac.ed.inf.ilp.constant.OrderStatus;
 import uk.ac.ed.inf.ilp.data.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -39,6 +38,8 @@ public class App
     private static NamedRegion central;
     private static ArrayList<LngLat> route = new ArrayList<>();
     private static ArrayList<Move> allMoves = new ArrayList<>();
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     /**
      * Main start point in application- will call classes from across the application to validate commandline arguments,
@@ -46,7 +47,7 @@ public class App
      * @param args = commandline arguments
      */
 
-    public static void main(String[] args ) throws MalformedURLException
+    public static void main(String[] args ) throws Exception
     {
         System.out.println("Welcome to PizzaDronz flightpathing and logging system");
 
@@ -68,9 +69,7 @@ public class App
             ordersAll = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders"), "Order");
 //            orders = (ArrayList<Order>) retriever.jsonReader(new URL(url+ "/orders/" + orderDate), "Order");
         }
-        catch(Exception e){
-            errorMessage("Incorrect URL for rest end point");
-        }
+        catch(Exception e){errorMessage("Incorrect URL for rest end point");}
         System.out.println("Connected to rest server");
 
         //Filter for only orders on specified date
@@ -79,11 +78,9 @@ public class App
                 orders.add(e);
             }
         }
-
         if (orders.size() == 0){
             System.err.println("No orders found for specified date. Result files will be empty");
         }
-
         //Instantiate file creator with given order date
         FileCreator fileGenerator = new FileCreator(orderDate);
 
@@ -125,22 +122,17 @@ public class App
             }
         }
         System.out.println("Generating results files...");
+
         //Create and populate result files for Deliveries, Flightpath and Drone respectively
         fileGenerator.createFile(orders);
         fileGenerator.createFile(route,true);
         fileGenerator.createFile(allMoves);
 
-        System.out.println("----------------------------------\n" + "Orders processed successfully and routes generated: see results file for paths and processed orders");
+        System.out.println("----------------------------------\n" + ANSI_GREEN + "Orders processed successfully and routes generated: see results file for paths and processed orders" + ANSI_RESET);
     }
 
-
-    public static void errorMessage(String message){
+    public static void errorMessage(String message) throws Exception {
         System.err.println(message + ". Program terminating...");
-        System.exit(1);
+        throw new Exception(message);
     }
-
-//    public static void main() throws MalformedURLException {
-//        String[] args = { "date", "url"};
-//        main(args);
-//    }
 }
