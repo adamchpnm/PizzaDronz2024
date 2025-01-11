@@ -57,6 +57,7 @@ public class App
         URL url = inputs.getWebsite();
         final DayOfWeek day = orderDate.getDayOfWeek();
 
+        System.out.println("Connecting to rest server...");
         // Create RestInformationRetriever object to obtain  data from the rest service
         RestInfoRetriever retriever = new RestInfoRetriever();
         retriever.connect(url);
