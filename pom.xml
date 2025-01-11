@@ -18,9 +18,9 @@
 
   <distributionManagement>
     <repository>
-      <id>in-project</id>
-      <name>In Project Repo</name>
-      <url>file://${project.basedir}/jarStore</url>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/adamchpnm/PizzaDronz2024</url>
     </repository>
   </distributionManagement>
 
