@@ -1,4 +1,5 @@
 package uk.ac.ed.inf;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import uk.ac.ed.inf.Validation.OrderValidator;
@@ -7,12 +8,16 @@ import uk.ac.ed.inf.ilp.constant.OrderValidationCode;
 import uk.ac.ed.inf.ilp.data.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.Random;
 
 
 public class OrderValidatorTests {
     Pizza[] pizzas = {new Pizza("Margarita", 1000), new Pizza("Calzone", 1400), new Pizza("Meat Lover", 1400),
-        new Pizza("Vegan Delight", 1100), new Pizza( "Super Cheese", 1400), new Pizza("All Shrooms", 900)};
+        new Pizza("Vegan Delight", 1100), new Pizza( "Super Cheese", 1400), new Pizza("All Shrooms", 900), new Pizza("24HOURS", 900), new Pizza("7DAYS", 900)};
 
     Restaurant[] restaurants = {
             new Restaurant("Civerinos Slice", new LngLat(-3.1912869215011597, 55.945535152517735),
@@ -20,15 +25,23 @@ public class OrderValidatorTests {
             new Restaurant("Sora Lella Vegan Restaurant",new LngLat(-3.202541470527649,55.943284737579376),
                     new DayOfWeek[]{DayOfWeek.MONDAY, DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY},  Arrays.copyOfRange(pizzas,2,4) ),
             new Restaurant("Domino's Pizza - Edinburgh - Southside", new LngLat(-3.1838572025299072,55.94449876875712),
-                    new DayOfWeek[]{DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY},Arrays.copyOfRange(pizzas,4,6))};
+                    new DayOfWeek[]{DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY},Arrays.copyOfRange(pizzas,4,6)),
+            new Restaurant("ALWAYS OPEN", new LngLat(-3.1838572025299072,55.94449876875712),
+                    new DayOfWeek[]{DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY},Arrays.copyOfRange(pizzas,7,8))};
 
     OrderValidator testInstance = new OrderValidator();
     LocalDate orderDate = LocalDate.of(2023,10,6);
     Order testOrder = new Order("200", orderDate, OrderStatus.UNDEFINED, OrderValidationCode.UNDEFINED, 2500, Arrays.copyOfRange(pizzas,0,2),
             new CreditCardInformation("1111222233334444", "11/25", "919"));
 
+    Order ALWAYSORDER = new Order("100", orderDate, OrderStatus.UNDEFINED, OrderValidationCode.UNDEFINED, 1000, Arrays.copyOfRange(pizzas,7,8),
+            new CreditCardInformation("1111222233334444", "11/25", "919"));
+
+
     public void resetTestOrder(){
         testOrder = new Order("200", orderDate, OrderStatus.UNDEFINED, OrderValidationCode.UNDEFINED, 2500, Arrays.copyOfRange(pizzas,0,2),
+                new CreditCardInformation("1111222233334444", "11/25", "919"));
+        ALWAYSORDER = new Order("100", orderDate, OrderStatus.UNDEFINED, OrderValidationCode.UNDEFINED, 1000, Arrays.copyOfRange(pizzas,7,8),
                 new CreditCardInformation("1111222233334444", "11/25", "919"));
     }
 
@@ -142,22 +155,26 @@ public class OrderValidatorTests {
         assertSame(testOrder.getOrderValidationCode(), OrderValidationCode.NO_ERROR);
     }
 
-    @Test
+    @RepeatedTest(100)
     public void invalidCardNum_Length(){
-        testOrder.getCreditCardInformation().setCreditCardNumber("19456543098971111");
+        String badNum = generateRandomCardBadLength();
+        testOrder.getCreditCardInformation().setCreditCardNumber(badNum);
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.CARD_NUMBER_INVALID, testOrder.getOrderValidationCode());
     }
-    @Test
+    @RepeatedTest(100)
     public void invalidCardNum_Characters(){
-        testOrder.getCreditCardInformation().setCreditCardNumber("ei392r43jnr48754");
+        String badChar = generateRandomCardChars();
+        testOrder.getCreditCardInformation().setCreditCardNumber(badChar);
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.CARD_NUMBER_INVALID, testOrder.getOrderValidationCode());
     }
 
-    @Test
+    @RepeatedTest(100)
     public void invalidExpiry_Expired(){
-        testOrder.getCreditCardInformation().setCreditCardExpiry("01/22");
+        String badExp = generateRandomDay();
+        testOrder.getCreditCardInformation().setCreditCardExpiry(badExp);
+        testOrder.setOrderDate(LocalDate.now());
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, testOrder.getOrderValidationCode());
     }
@@ -167,46 +184,47 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, testOrder.getOrderValidationCode());
     }
-
-    @Test
+    @RepeatedTest(100)
     public void invalidExpiry_Characters(){
-        testOrder.getCreditCardInformation().setCreditCardExpiry("12c473");
+        String badChar = generateRandomExpChars();
+        testOrder.getCreditCardInformation().setCreditCardExpiry(badChar);
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, testOrder.getOrderValidationCode());
     }
-
-    @Test
+    @RepeatedTest(100)
     public void invalidExpiry_CloseToValid(){
-        LocalDate date = LocalDate.of(2023,10,1);
-        testOrder.setOrderDate(date);
-        testOrder.getCreditCardInformation().setCreditCardExpiry("09/23");
-        testInstance.validateOrder(testOrder, restaurants);
-        assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, testOrder.getOrderValidationCode());
+        LocalDate date = generateRandomDayJan();
+        ALWAYSORDER.setOrderDate(date);
+        ALWAYSORDER.getCreditCardInformation().setCreditCardExpiry("12/24");
+        testInstance.validateOrder(ALWAYSORDER, restaurants);
+        assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, ALWAYSORDER.getOrderValidationCode());
     }
-    @Test
+    @RepeatedTest(100)
     public void validExpiry_CloseToInvalid(){
-        LocalDate date = LocalDate.of(2025, 1,31);
-        testOrder.setOrderDate(date);
-        testOrder.getCreditCardInformation().setCreditCardExpiry("01/25");
-        testInstance.validateOrder(testOrder, restaurants);
-        assertSame(OrderValidationCode.NO_ERROR, testOrder.getOrderValidationCode());
+        LocalDate date = generateRandomDayJan();
+        ALWAYSORDER.setOrderDate(date);
+        ALWAYSORDER.getCreditCardInformation().setCreditCardExpiry("01/25");
+        testInstance.validateOrder(ALWAYSORDER, restaurants);
+        assertSame(OrderValidationCode.NO_ERROR, ALWAYSORDER.getOrderValidationCode());
     }
 
-    @Test
+    @RepeatedTest(100)
     public void invalidCVV_Length(){
         //Resetting other credit info
-        testOrder.setCreditCardInformation(new CreditCardInformation("1111222233334444","11/25", "9100" ));
+        String badCVV = generateRandomCVVBadLength();
+        testOrder.setCreditCardInformation(new CreditCardInformation("1111222233334444","11/25", badCVV ));
         testOrder.setOrderDate(orderDate);
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.CVV_INVALID, testOrder.getOrderValidationCode());
     }
-
-    @Test
+    @RepeatedTest(100)
     public void invalidCVV_Characters(){
-        testOrder.setCreditCardInformation(new CreditCardInformation("1111222233334444", "10/26", "3o3"));
+        String charCVV = generateRandomCVVChars();
+        testOrder.setCreditCardInformation(new CreditCardInformation("1111222233334444", "10/26", charCVV));
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.CVV_INVALID, testOrder.getOrderValidationCode());
     }
+
     @Test
     public void pizzaExist(){
         testOrder.setPizzasInOrder(new Pizza[]{new Pizza("All Shrooms", 900)});
@@ -214,21 +232,18 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.NO_ERROR, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void pizzaDoesntExist(){
         testOrder.setPizzasInOrder(new Pizza[]{new Pizza("All Shrooms", 900), new Pizza("Yummers", 130000)});
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.PIZZA_NOT_DEFINED, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void pizzaDoesntExist_null(){
         testOrder.setPizzasInOrder(new Pizza[]{new Pizza("",0)});
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.PIZZA_NOT_DEFINED, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void pizzasFromSameRestaurant(){
         testOrder.setPizzasInOrder(Arrays.copyOfRange(pizzas,2,4));
@@ -236,15 +251,12 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.NO_ERROR, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void notFromSameRestaurant(){
         testOrder.setPizzasInOrder(new Pizza[]{new Pizza("Margarita", 1000),new Pizza("Meat Lover", 1400 )});
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.PIZZA_FROM_MULTIPLE_RESTAURANTS, testOrder.getOrderValidationCode());
     }
-
-
     @Test
     public void invalidNumberOfPizzas(){
         testOrder.setPizzasInOrder(pizzas);
@@ -252,6 +264,7 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.MAX_PIZZA_COUNT_EXCEEDED,testOrder.getOrderValidationCode());
     }
+
     @Test
     public void totalAddedCorrectly(){
         testOrder.setPizzasInOrder(new Pizza[]{new Pizza( "Super Cheese", 1400), new Pizza("All Shrooms", 900)});
@@ -259,7 +272,6 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.NO_ERROR, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void totalNotAddedCorrectly(){
         testOrder.setPriceTotalInPence(2700);
@@ -275,7 +287,6 @@ public class OrderValidatorTests {
         testInstance.validateOrder(testOrder, restaurants);
         assertSame(OrderValidationCode.NO_ERROR, testOrder.getOrderValidationCode());
     }
-
     @Test
     public void restaurantClosed(){
         testOrder.setOrderDate(LocalDate.of(2023, 10,11));
@@ -283,8 +294,103 @@ public class OrderValidatorTests {
         assertSame(OrderValidationCode.RESTAURANT_CLOSED, testOrder.getOrderValidationCode());
     }
 
+    private static String generateRandomCardGood() {
+        String zeroToNine = "0123456789";
+        Random rand=new Random();
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
 
+    private static String generateRandomCardChars() {
+        String zeroToNine = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
+        Random rand=new Random();
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
 
+    private static String generateRandomCardBadLength() {
+        String zeroToNine = "0123456789";
+        Random rand=new Random();
+        int howLong = rand.nextInt(50);
+        if (howLong == 16){
+            howLong ++;
+        }
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < howLong; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
+
+    private static String generateRandomCVVChars() {
+        String zeroToNine = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
+        Random rand=new Random();
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
+
+    private static String generateRandomCVVBadLength() {
+        String zeroToNine = "0123456789";
+        Random rand = new Random();
+        int howLong = rand.nextInt(50);
+        if (howLong == 3) {
+            howLong++;
+        }
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < howLong; i++) {
+            int randIndex = rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
+
+    private static String generateRandomExpChars() {
+        String zeroToNine = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
+        Random rand=new Random();
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < 2; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        res.append('/');
+        for (int i = 0; i < 2; i++) {
+            int randIndex=rand.nextInt(zeroToNine.length());
+            res.append(zeroToNine.charAt(randIndex));
+        }
+        return res.toString();
+    }
+
+    private static LocalDate generateRandomDayJan() {
+        Random rand=new Random();
+        int day = rand.nextInt(1, 31);
+        return LocalDate.of(2025,1,day);
+    }
+
+//    public static void main(String[] args){
+//        System.out.println(generateRandomDay());
+//    }
+
+    public static String generateRandomDay() {
+        LocalDate start = LocalDate.of(2000, Month.JANUARY, 1);
+        LocalDate end = LocalDate.of(2024, Month.DECEMBER, 31);
+        long days = ChronoUnit.DAYS.between(start, end);
+        LocalDate randomDate = start.plusDays(new Random().nextInt((int) days + 1));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
+        return randomDate.format(formatter);
+    }
 
 
 
