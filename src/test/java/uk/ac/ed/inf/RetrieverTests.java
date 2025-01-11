@@ -1,11 +1,9 @@
 package uk.ac.ed.inf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import uk.ac.ed.inf.IO.RestInfoRetriever;
 
 import java.net.URL;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RetrieverTests {
     public static final String ANSI_BLACK = "\u001B[30m";

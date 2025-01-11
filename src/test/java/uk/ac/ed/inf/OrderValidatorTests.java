@@ -1,5 +1,6 @@
 package uk.ac.ed.inf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import uk.ac.ed.inf.Validation.OrderValidator;
 import uk.ac.ed.inf.ilp.constant.OrderStatus;
 import uk.ac.ed.inf.ilp.constant.OrderValidationCode;
@@ -8,7 +9,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
 
 public class OrderValidatorTests {
     Pizza[] pizzas = {new Pizza("Margarita", 1000), new Pizza("Calzone", 1400), new Pizza("Meat Lover", 1400),
@@ -139,7 +139,7 @@ public class OrderValidatorTests {
     @Test
     public void validOrder(){
         testInstance.validateOrder(testOrder, restaurants);
-        assertSame(testOrder.getOrderValidationCode(),OrderValidationCode.NO_ERROR);
+        assertSame(testOrder.getOrderValidationCode(), OrderValidationCode.NO_ERROR);
     }
 
     @Test

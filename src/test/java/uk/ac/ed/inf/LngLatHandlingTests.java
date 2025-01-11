@@ -1,9 +1,9 @@
 package uk.ac.ed.inf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import uk.ac.ed.inf.Validation.LngLatHandler;
 import uk.ac.ed.inf.ilp.data.LngLat;
 import uk.ac.ed.inf.ilp.data.NamedRegion;
-import static org.junit.Assert.*;
 
 public class LngLatHandlingTests {
 
