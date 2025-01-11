@@ -16,6 +16,14 @@
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/adamchpnm/PizzaDronz2024</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -40,15 +48,15 @@
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>uk.ac.ed.inf</groupId>
-          <artifactId>IlpDataObjects</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-          <groupId>org.junit.platform</groupId>
-          <artifactId>junit-platform-commons</artifactId>
-      </dependency>
+    <dependency>
+      <groupId>uk.ac.ed.inf</groupId>
+      <artifactId>IlpDataObjects</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
