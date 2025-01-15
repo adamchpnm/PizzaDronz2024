@@ -1,4 +1,5 @@
 package uk.ac.ed.inf;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import uk.ac.ed.inf.Validation.LngLatHandler;
@@ -64,7 +65,6 @@ public class LngLatHandlingTests {
         System.out.println("Checking for the next point being correct:");
         for (double i = 0.0; i < 360.0; i += 22.5) {
             System.out.println("    Compass direction: "+i);
-            nextTestCount = i;
             nextPointCorrect();
             System.out.println("    Pass\n");
         }
@@ -73,7 +73,6 @@ public class LngLatHandlingTests {
         System.out.println("Checking for multi-step point (heuristics) being correct (W):");
         for (double i = 0.0; i < 360.0; i += 22.5) {
             System.out.println("    Compass direction: "+i);
-            nextTestCount = i;
             farPointCorrect();
             System.out.println("    Pass\n");
         }
@@ -130,14 +129,16 @@ public class LngLatHandlingTests {
         assertFalse(testInstance.isInRegion(notWithin, pentagon));
     }
 
-    @Test
+    @RepeatedTest(16)
     public void nextPointCorrect(){
         assertEquals(testInstance.nextPosition(oldPoint, nextTestCount), map.get(nextTestCount));
+        nextTestCount += 22.5;
     }
 
-    @Test
+    @RepeatedTest(16)
     public void farPointCorrect(){
         assertEquals(testInstance.nextFarPosition(oldPoint, nextTestCount), mapFar.get(nextTestCount));
+        nextTestCount += 22.5;
     }
 
     public Map getMapNext(){

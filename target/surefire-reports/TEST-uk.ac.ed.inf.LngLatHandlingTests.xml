@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.LngLatHandlingTests" time="0.031" tests="13" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.LngLatHandlingTests" time="0.091" tests="41" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.2.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071\surefirebooter-20250115163219530_3.jar C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071 2025-01-15T16-32-19_325-jvmRun1 surefire-20250115163219530_1tmp surefire_0-20250115163219530_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724\surefirebooter-20250115181223563_3.jar C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724 2025-01-15T18-12-23_394-jvmRun1 surefire-20250115181223563_1tmp surefire_0-20250115181223563_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\DEV\PizzaDronz2024\PizzaDronz2024\target\test-classes;C:\DEV\PizzaDronz2024\PizzaDronz2024\target\classes;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\adamc\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\adamc\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\DEV\PizzaDronz2024\PizzaDronz2024\jarStore\uk\ac\ed\inf\IlpDataObjects\1.0.0\IlpDataObjects-1.0.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.14.2\jackson-databind-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.14.2\jackson-annotations-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.14.2\jackson-core-2.14.2.jar;C:\Users\adamc\.m2\repository\de\grundid\opendatalab\geojson-jackson\1.14\geojson-jackson-1.14.jar;C:\Users\adamc\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.14.2\jackson-datatype-jsr310-2.14.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071\surefirebooter-20250115163219530_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724\surefirebooter-20250115181223563_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.2.1+1-1"/>
@@ -56,11 +56,23 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="farPointCorrect_S" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="farPointCorrect_W" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="nextPointCorrect_E" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="nextPointCorrect_N" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="allTestsPass" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0">
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.002"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.002"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="nextPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="allTestsPass" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001">
     <system-out><![CDATA[Checking for correct distance calculation:
 Pass
 
@@ -85,26 +97,128 @@ Pass
 Checking for not being within a multi-point region:
 Pass
 
-Checking for the next point being correct (E):
-Pass
+Checking for the next point being correct:
+    Compass direction: 0.0
+    Pass
 
-Checking for the next point being correct (N):
-Pass
+    Compass direction: 22.5
+    Pass
+
+    Compass direction: 45.0
+    Pass
+
+    Compass direction: 67.5
+    Pass
+
+    Compass direction: 90.0
+    Pass
+
+    Compass direction: 112.5
+    Pass
+
+    Compass direction: 135.0
+    Pass
+
+    Compass direction: 157.5
+    Pass
+
+    Compass direction: 180.0
+    Pass
+
+    Compass direction: 202.5
+    Pass
+
+    Compass direction: 225.0
+    Pass
+
+    Compass direction: 247.5
+    Pass
+
+    Compass direction: 270.0
+    Pass
+
+    Compass direction: 292.5
+    Pass
+
+    Compass direction: 315.0
+    Pass
+
+    Compass direction: 337.5
+    Pass
 
 Checking for multi-step point (heuristics) being correct (W):
-Pass
+    Compass direction: 0.0
+    Pass
 
-Checking for multi-step point (heuristics) being correct (S):
-Pass
+    Compass direction: 22.5
+    Pass
+
+    Compass direction: 45.0
+    Pass
+
+    Compass direction: 67.5
+    Pass
+
+    Compass direction: 90.0
+    Pass
+
+    Compass direction: 112.5
+    Pass
+
+    Compass direction: 135.0
+    Pass
+
+    Compass direction: 157.5
+    Pass
+
+    Compass direction: 180.0
+    Pass
+
+    Compass direction: 202.5
+    Pass
+
+    Compass direction: 225.0
+    Pass
+
+    Compass direction: 247.5
+    Pass
+
+    Compass direction: 270.0
+    Pass
+
+    Compass direction: 292.5
+    Pass
+
+    Compass direction: 315.0
+    Pass
+
+    Compass direction: 337.5
+    Pass
 
 ]]></system-out>
   </testcase>
-  <testcase name="notCloseToPoint" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="notWithinRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="notWithinMultiPointRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="withinMultiPointRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="correctDistanceCalculated" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="closeToPoint" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
-  <testcase name="withinRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.015"/>
-  <testcase name="closeToBeingClose" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="notCloseToPoint" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="notWithinRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="farPointCorrect" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.0"/>
+  <testcase name="notWithinMultiPointRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.002"/>
+  <testcase name="withinMultiPointRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.002"/>
+  <testcase name="correctDistanceCalculated" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.002"/>
+  <testcase name="closeToPoint" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="withinRegion" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
+  <testcase name="closeToBeingClose" classname="uk.ac.ed.inf.LngLatHandlingTests" time="0.001"/>
 </testsuite>
