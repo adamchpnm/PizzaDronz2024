@@ -5,6 +5,9 @@ import uk.ac.ed.inf.Validation.LngLatHandler;
 import uk.ac.ed.inf.ilp.data.LngLat;
 import uk.ac.ed.inf.ilp.data.NamedRegion;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LngLatHandlingTests {
 
     LngLatHandler testInstance = new LngLatHandler();
@@ -18,6 +21,12 @@ public class LngLatHandlingTests {
     NamedRegion central = new NamedRegion("Central Area", region);
     NamedRegion pentagon = new NamedRegion("Pentagon", multisideRegion);
 
+    Map<Double, LngLat> map = getMapNext();
+    LngLat oldPoint = new LngLat(3.11111,52.222222);
+
+    Map<Double, LngLat> mapFar = getMapFar();
+
+    double nextTestCount = 0.0;
     @Test
     public void allTestsPass() {
         System.out.println("Checking for correct distance calculation:");
@@ -52,22 +61,22 @@ public class LngLatHandlingTests {
         notWithinMultiPointRegion();
         System.out.println("Pass\n");
 
-        System.out.println("Checking for the next point being correct (E):");
-        nextPointCorrect_E();
-        System.out.println("Pass\n");
-
-        //repeat all dirs
-        System.out.println("Checking for the next point being correct (N):");
-        nextPointCorrect_N();
-        System.out.println("Pass\n");
+        System.out.println("Checking for the next point being correct:");
+        for (double i = 0.0; i < 360.0; i += 22.5) {
+            System.out.println("    Compass direction: "+i);
+            nextTestCount = i;
+            nextPointCorrect();
+            System.out.println("    Pass\n");
+        }
+        nextTestCount = 0.0;
 
         System.out.println("Checking for multi-step point (heuristics) being correct (W):");
-        farPointCorrect_W();
-        System.out.println("Pass\n");
-
-        System.out.println("Checking for multi-step point (heuristics) being correct (S):");
-        farPointCorrect_S();
-        System.out.println("Pass\n");
+        for (double i = 0.0; i < 360.0; i += 22.5) {
+            System.out.println("    Compass direction: "+i);
+            nextTestCount = i;
+            farPointCorrect();
+            System.out.println("    Pass\n");
+        }
     }
 
 
@@ -121,33 +130,55 @@ public class LngLatHandlingTests {
         assertFalse(testInstance.isInRegion(notWithin, pentagon));
     }
 
-
     @Test
-    public void nextPointCorrect_E(){
-        LngLat oldPoint = new LngLat(3.11111,52.222222);
-        LngLat newPoint = new LngLat(3.11126, 52.222222);
-        assertEquals(testInstance.nextPosition(oldPoint, 0.00), newPoint);
+    public void nextPointCorrect(){
+        assertEquals(testInstance.nextPosition(oldPoint, nextTestCount), map.get(nextTestCount));
     }
 
     @Test
-    public void nextPointCorrect_N(){
-        LngLat oldPoint = new LngLat(3.11111,52.222222);
-        LngLat newPoint = new LngLat(3.11111, 52.222372);
-        assertEquals(testInstance.nextPosition(oldPoint, 90.00), newPoint);
+    public void farPointCorrect(){
+        assertEquals(testInstance.nextFarPosition(oldPoint, nextTestCount), mapFar.get(nextTestCount));
     }
 
-    @Test
-    public void farPointCorrect_W(){
-        LngLat oldPoint = new LngLat(3.11111,52.222222);
-        LngLat newPoint = new LngLat(3.11066, 52.222222);
-        assertEquals(testInstance.nextFarPosition(oldPoint, 180.00), newPoint);
+    public Map getMapNext(){
+        Map<Double, LngLat> map = new HashMap<>();
+        map.put(0.0, new LngLat(3.11126,52.222222));
+        map.put(22.5, new LngLat(3.1112485819298765, 52.22227940251486));
+        map.put(45.0, new LngLat(3.111216066017178, 52.22232806601718));
+        map.put(67.5, new LngLat(3.111167402514855, 52.22236058192988));
+        map.put(90.0, new LngLat(3.11111,52.222372));
+        map.put(112.5, new LngLat(3.1110525974851453, 52.22236058192988));
+        map.put(135.0, new LngLat(3.111003933982822, 52.22232806601718));
+        map.put(157.5, new LngLat(3.1109714180701236, 52.22227940251486));
+        map.put(180.0, new LngLat(3.11096,52.222222));
+        map.put(202.5, new LngLat(3.1109714180701236, 52.22216459748515));
+        map.put(225.0, new LngLat(3.111003933982822, 52.22211593398283));
+        map.put(247.5, new LngLat(3.1110525974851453, 52.22208341807013));
+        map.put(270.0, new LngLat(3.11111, 52.222072000000004));
+        map.put(292.5, new LngLat(3.111167402514855, 52.22208341807013));
+        map.put(315.0, new LngLat(3.111216066017178, 52.22211593398283));
+        map.put(337.5, new LngLat(3.1112485819298765, 52.22216459748515));
+        return map;
     }
 
-    @Test
-    public void farPointCorrect_S(){
-        LngLat oldPoint = new LngLat(3.11111,52.222222);
-        LngLat newPoint = new LngLat(3.11111, 52.221772);
-        assertEquals(testInstance.nextFarPosition(oldPoint, 270.00), newPoint);
+    public Map getMapFar() {
+        Map<Double, LngLat> map = new HashMap<>();
+        map.put(0.0, new LngLat(3.11156, 52.222222));
+        map.put(22.5, new LngLat(3.11152574578963, 52.22239420754457));
+        map.put(45.0, new LngLat(3.111428198051534, 52.22254019805153));
+        map.put(67.5, new LngLat(3.1112822075445643, 52.22263774578963));
+        map.put(90.0, new LngLat(3.11111, 52.222672));
+        map.put(112.5, new LngLat(3.110937792455436, 52.22263774578963));
+        map.put(135.0, new LngLat(3.110791801948466, 52.22254019805153));
+        map.put(157.5, new LngLat(3.11069425421037, 52.22239420754457));
+        map.put(180.0, new LngLat(3.11066, 52.222222));
+        map.put(202.5, new LngLat(3.11069425421037, 52.22204979245544));
+        map.put(225.0, new LngLat(3.110791801948466, 52.22190380194847));
+        map.put(247.5, new LngLat(3.110937792455436, 52.22180625421037));
+        map.put(270.0, new LngLat(3.11111, 52.221772));
+        map.put(292.5, new LngLat(3.1112822075445643, 52.22180625421037));
+        map.put(315.0, new LngLat(3.111428198051534, 52.22190380194847));
+        map.put(337.5, new LngLat(3.11152574578963, 52.22204979245544));
+        return map;
     }
-
 }
