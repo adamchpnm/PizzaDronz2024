@@ -56,6 +56,7 @@ public class LngLatHandlingTests {
         nextPointCorrect_E();
         System.out.println("Pass\n");
 
+        //repeat all dirs
         System.out.println("Checking for the next point being correct (N):");
         nextPointCorrect_N();
         System.out.println("Pass\n");
