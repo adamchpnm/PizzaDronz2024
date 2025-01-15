@@ -30,7 +30,7 @@ public class RetrieverTests {
     @Test
     public void wrongURL() {
         System.out.println("Checking with wrong URL provided:"+ANSI_BLACK);
-        String[] wrongURLargs = { "2025-01-20", "https://github.com/adamchpnm/PizzaDronz2024/"};
+        String[] wrongURLargs = { "2025-01-20", "https://github.com/adamchpnm/"};
         Exception exception = assertThrows(Exception.class, () -> App.main(wrongURLargs));
         String expectedMessage = "Incorrect URL for rest end point";
         String actualMessage = exception.getMessage();

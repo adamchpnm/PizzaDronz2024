@@ -173,10 +173,10 @@ public class OrderValidatorTests {
     @RepeatedTest(100)
     public void invalidExpiry_Expired(){
         String badExp = generateRandomDay();
-        testOrder.getCreditCardInformation().setCreditCardExpiry(badExp);
-        testOrder.setOrderDate(LocalDate.now());
-        testInstance.validateOrder(testOrder, restaurants);
-        assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, testOrder.getOrderValidationCode());
+        ALWAYSORDER.getCreditCardInformation().setCreditCardExpiry(badExp);
+        ALWAYSORDER.setOrderDate(LocalDate.now());
+        testInstance.validateOrder(ALWAYSORDER, restaurants);
+        assertSame(OrderValidationCode.EXPIRY_DATE_INVALID, ALWAYSORDER.getOrderValidationCode());
     }
     @Test
     public void invalidExpiry_Format(){
