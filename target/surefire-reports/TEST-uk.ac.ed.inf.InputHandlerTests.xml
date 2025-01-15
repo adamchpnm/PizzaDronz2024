@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.InputHandlerTests" time="0.023" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.InputHandlerTests" time="0.016" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.2.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire7359642490828553516\surefirebooter-20250115155226736_3.jar C:\Users\adamc\AppData\Local\Temp\surefire7359642490828553516 2025-01-15T15-52-26_475-jvmRun1 surefire-20250115155226736_1tmp surefire_0-20250115155226736_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071\surefirebooter-20250115163219530_3.jar C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071 2025-01-15T16-32-19_325-jvmRun1 surefire-20250115163219530_1tmp surefire_0-20250115163219530_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\DEV\PizzaDronz2024\PizzaDronz2024\target\test-classes;C:\DEV\PizzaDronz2024\PizzaDronz2024\target\classes;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\adamc\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\adamc\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\DEV\PizzaDronz2024\PizzaDronz2024\jarStore\uk\ac\ed\inf\IlpDataObjects\1.0.0\IlpDataObjects-1.0.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.14.2\jackson-databind-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.14.2\jackson-annotations-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.14.2\jackson-core-2.14.2.jar;C:\Users\adamc\.m2\repository\de\grundid\opendatalab\geojson-jackson\1.14\geojson-jackson-1.14.jar;C:\Users\adamc\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.14.2\jackson-datatype-jsr310-2.14.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire7359642490828553516\surefirebooter-20250115155226736_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire2163534567334158071\surefirebooter-20250115163219530_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.2.1+1-1"/>
