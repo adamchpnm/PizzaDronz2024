@@ -48,7 +48,7 @@ public class AppTest
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         System.out.println(ANSI_BLUE+"Complete app run through in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
-        assertTrue(true);
+        assertTrue(false);
     }
 
     @Test
