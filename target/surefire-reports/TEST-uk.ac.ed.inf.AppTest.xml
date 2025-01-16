@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.AppTest" time="7.664" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="uk.ac.ed.inf.AppTest" time="7.87" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,8 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.2.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724\surefirebooter-20250115181223563_3.jar C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724 2025-01-15T18-12-23_394-jvmRun1 surefire-20250115181223563_1tmp surefire_0-20250115181223563_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\adamc\AppData\Local\Temp\surefire829411768550598686\surefirebooter-20250116193030145_3.jar C:\Users\adamc\AppData\Local\Temp\surefire829411768550598686 2025-01-16T19-30-29_941-jvmRun1 surefire-20250116193030145_1tmp surefire_0-20250116193030145_2tmp"/>
     <property name="jdk.debug" value="release"/>
+    <property name="test" value="AppTest"/>
     <property name="surefire.test.class.path" value="C:\DEV\PizzaDronz2024\PizzaDronz2024\target\test-classes;C:\DEV\PizzaDronz2024\PizzaDronz2024\target\classes;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\adamc\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\adamc\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\adamc\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\DEV\PizzaDronz2024\PizzaDronz2024\jarStore\uk\ac\ed\inf\IlpDataObjects\1.0.0\IlpDataObjects-1.0.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.14.2\jackson-databind-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.14.2\jackson-annotations-2.14.2.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.14.2\jackson-core-2.14.2.jar;C:\Users\adamc\.m2\repository\de\grundid\opendatalab\geojson-jackson\1.14\geojson-jackson-1.14.jar;C:\Users\adamc\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\adamc\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.14.2\jackson-datatype-jsr310-2.14.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\adamc"/>
@@ -30,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire3311814048508224724\surefirebooter-20250115181223563_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\adamc\AppData\Local\Temp\surefire829411768550598686\surefirebooter-20250116193030145_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.2.1+1-1"/>
@@ -56,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="appRuns" classname="uk.ac.ed.inf.AppTest" time="2.615">
+  <testcase name="appRuns" classname="uk.ac.ed.inf.AppTest" time="2.78">
     <system-out><![CDATA[Checking app runs normally:&amp#27;[30m
 Welcome to PizzaDronz flightpathing and logging system
 Connecting to rest server...
@@ -66,10 +67,11 @@ Routes generated
 Generating results files...
 ----------------------------------
 &amp#27;[32mOrders processed successfully and routes generated: see results file for paths and processed orders&amp#27;[0m
-&amp#27;[32m
+&amp#27;[34mComplete app run through in 2749ms&amp#27;[32m
+----------------------------------
 ]]></system-out>
   </testcase>
-  <testcase name="allTestsPass" classname="uk.ac.ed.inf.AppTest" time="0.59">
+  <testcase name="allTestsPass" classname="uk.ac.ed.inf.AppTest" time="0.565">
     <system-out><![CDATA[&amp#27;[35m----------------------------------
 Checking for correct distance calculation:
 Pass
@@ -281,7 +283,7 @@ Connecting to rest server...
 
 ]]></system-out>
     <system-err><![CDATA[No arguments provided. Will run with below default arguments:
-Date: 2025-01-15 (current date)
+Date: 2025-01-16 (current date)
 Website: https://ilp-rest-2024.azurewebsites.net/ (default website)
 Incorrect number of arguments passed. Program terminating...
 Date not in Localdate format YYYY-MM-DD. Program terminating...
@@ -290,7 +292,7 @@ Invalid URL entered - cannot be connected to. Program terminating...
 Incorrect URL for rest end point. Program terminating...
 ]]></system-err>
   </testcase>
-  <testcase name="appEmpty" classname="uk.ac.ed.inf.AppTest" time="0.63">
+  <testcase name="appEmpty" classname="uk.ac.ed.inf.AppTest" time="0.628">
     <system-out><![CDATA[Checking app runs with empty day:&amp#27;[30m
 Welcome to PizzaDronz flightpathing and logging system
 Connecting to rest server...
@@ -300,10 +302,11 @@ Routes generated
 Generating results files...
 ----------------------------------
 &amp#27;[32mOrders processed successfully and routes generated: see results file for paths and processed orders&amp#27;[0m
-&amp#27;[32m
+&amp#27;[34mComplete app run through in 628ms&amp#27;[32m
+----------------------------------
 ]]></system-out>
   </testcase>
-  <testcase name="everythingWorks" classname="uk.ac.ed.inf.AppTest" time="3.782">
+  <testcase name="everythingWorks" classname="uk.ac.ed.inf.AppTest" time="3.861">
     <system-out><![CDATA[&amp#27;[0mRunning all unit tests
 &amp#27;[35m----------------------------------
 Checking for correct distance calculation:
@@ -526,7 +529,8 @@ Routes generated
 Generating results files...
 ----------------------------------
 &amp#27;[32mOrders processed successfully and routes generated: see results file for paths and processed orders&amp#27;[0m
-&amp#27;[32m
+&amp#27;[34mComplete app run through in 676ms&amp#27;[32m
+----------------------------------
 Checking app runs normally:&amp#27;[30m
 Welcome to PizzaDronz flightpathing and logging system
 Connecting to rest server...
@@ -536,7 +540,8 @@ Routes generated
 Generating results files...
 ----------------------------------
 &amp#27;[32mOrders processed successfully and routes generated: see results file for paths and processed orders&amp#27;[0m
-&amp#27;[32m
+&amp#27;[34mComplete app run through in 3012ms&amp#27;[32m
+----------------------------------
 &amp#27;[32m
 APP RUNS SUCCESSFULLY
 ----------------------------------
@@ -544,7 +549,7 @@ APP RUNS SUCCESSFULLY
 ALL TESTS PASS
 ]]></system-out>
     <system-err><![CDATA[No arguments provided. Will run with below default arguments:
-Date: 2025-01-15 (current date)
+Date: 2025-01-16 (current date)
 Website: https://ilp-rest-2024.azurewebsites.net/ (default website)
 Incorrect number of arguments passed. Program terminating...
 Date not in Localdate format YYYY-MM-DD. Program terminating...
