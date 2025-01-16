@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Move</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">uk.ac.ed.inf.Pathing</a>
+</div>
+
+<h1>Coverage Summary for Class: Move (uk.ac.ed.inf.Pathing)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Move</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package uk.ac.ed.inf.Pathing;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;/**
+<i class="no-highlight">4</i>&nbsp; * Class representing each move the drone makes- stores orderNo the move is a part of, the previous coordinates, next coordinates and
+<i class="no-highlight">5</i>&nbsp; * the angle between the coordinates
+<i class="no-highlight">6</i>&nbsp; */
+<i class="no-highlight">7</i>&nbsp;public class Move {
+<i class="no-highlight">8</i>&nbsp;    private final String orderNo;
+<i class="no-highlight">9</i>&nbsp;    private final double fromLongitude;
+<i class="no-highlight">10</i>&nbsp;    private final double fromLatitude;
+<i class="no-highlight">11</i>&nbsp;    private final double angle;
+<i class="no-highlight">12</i>&nbsp;    private final double toLongitude;
+<i class="no-highlight">13</i>&nbsp;    private final double toLatitude;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * Parameterised constructor to create an instance of the move
+<i class="no-highlight">17</i>&nbsp;     * @param orderNum = number for the order currently being completed that the move is apart of
+<i class="no-highlight">18</i>&nbsp;     * @param fromLong = previous coordinates longitude value
+<i class="no-highlight">19</i>&nbsp;     * @param fromLat = previous coordinates latitude value
+<i class="no-highlight">20</i>&nbsp;     * @param direction = angle between previous and next coordinates
+<i class="no-highlight">21</i>&nbsp;     * @param toLong = next coordinates longitude value
+<i class="no-highlight">22</i>&nbsp;     * @param toLat = next coordinates latitude value
+<i class="no-highlight">23</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    public Move(String orderNum, double fromLong, double fromLat, double direction, double toLong, double toLat){</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        orderNo = orderNum;</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        fromLongitude = fromLong;</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        fromLatitude = fromLat;</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        angle = direction;</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        toLongitude = toLong;</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        toLatitude = toLat;</b>
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    /**
+<i class="no-highlight">34</i>&nbsp;    * The following getters are used during serialisation - each returns an attribute from above
+<i class="no-highlight">35</i>&nbsp;    */
+<i class="no-highlight">36</i>&nbsp;    public String getOrderNo() {
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        return orderNo;</b>
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;    public double getFromLongitude() {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        return fromLongitude;</b>
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;    public double getFromLatitude() {
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        return fromLatitude;</b>
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;    public double getAngle() {
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        return angle;</b>
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;    public double getToLongitude() {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        return toLongitude;</b>
+<i class="no-highlight">50</i>&nbsp;    }
+<i class="no-highlight">51</i>&nbsp;    public double getToLatitude() {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        return toLatitude;</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-16 18:18</div>
+</div>
+</body>
+</html>

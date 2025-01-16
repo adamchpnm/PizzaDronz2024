@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RouteNode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">uk.ac.ed.inf.Pathing</a>
+</div>
+
+<h1>Coverage Summary for Class: RouteNode (uk.ac.ed.inf.Pathing)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RouteNode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package uk.ac.ed.inf.Pathing;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import uk.ac.ed.inf.ilp.data.LngLat;
+<i class="no-highlight">4</i>&nbsp;/**
+<i class="no-highlight">5</i>&nbsp; * Class creates nodes for representation on the map during pathfinding. Stores their scores in relation to how good
+<i class="no-highlight">6</i>&nbsp; * they are for an efficient path and the previous node to itself in the route
+<i class="no-highlight">7</i>&nbsp; */
+<i class="no-highlight">8</i>&nbsp;public class RouteNode implements Comparable&lt;RouteNode&gt; {
+<i class="no-highlight">9</i>&nbsp;    private final LngLat current;
+<i class="no-highlight">10</i>&nbsp;    private LngLat previous;
+<i class="no-highlight">11</i>&nbsp;    private double routeScore;
+<i class="no-highlight">12</i>&nbsp;    private double estimatedScore;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;    /**
+<i class="no-highlight">15</i>&nbsp;     * Constructor for creating a new Node, will set routescore and estimated score as least desired ie
+<i class="no-highlight">16</i>&nbsp;     * very large for heuristic
+<i class="no-highlight">17</i>&nbsp;     * @param node = point to be used for node creation
+<i class="no-highlight">18</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    public RouteNode(LngLat node){</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        current = node;</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        previous = null;</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        routeScore = Double.POSITIVE_INFINITY;</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        estimatedScore = Double.POSITIVE_INFINITY;</b>
+<i class="no-highlight">24</i>&nbsp;    }
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    /**
+<i class="no-highlight">27</i>&nbsp;     * Parameterised constructor for node creation. Will allow for assigning actual and estimated scores
+<i class="no-highlight">28</i>&nbsp;     * @param node = point to be used for node creation
+<i class="no-highlight">29</i>&nbsp;     * @param previousNode = point from which node is a connection, the previous point in the path
+<i class="no-highlight">30</i>&nbsp;     * @param scoreReal = actual score - used for determining which node in a set of connections to set as previous node
+<i class="no-highlight">31</i>&nbsp;     * @param scoreEstimated = estimated score - takes into account total distance so far as well as heuristics score,
+<i class="no-highlight">32</i>&nbsp;     *                       used for determining which node is taken from the frontier to expand
+<i class="no-highlight">33</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    public RouteNode(LngLat node, LngLat previousNode, double scoreReal, double scoreEstimated){</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        current = node;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        previous = previousNode;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        routeScore = scoreReal;</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        estimatedScore = scoreEstimated;</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    public LngLat getPrevious() {
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        return previous;</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;    public double getRouteScore(){
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        return routeScore;</b>
+<i class="no-highlight">46</i>&nbsp;    }
+<i class="no-highlight">47</i>&nbsp;    public LngLat getCurrent(){
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        return current;</b>
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    /**
+<i class="no-highlight">52</i>&nbsp;     * Overridden compareTo - used in priority queue for ordering routenodes by estimated score
+<i class="no-highlight">53</i>&nbsp;     * @return value indicating how the current routenodes estimated score compares to any routenode being compared to
+<i class="no-highlight">54</i>&nbsp;     */
+<i class="no-highlight">55</i>&nbsp;    @Override
+<i class="no-highlight">56</i>&nbsp;    public int compareTo(RouteNode other) {
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        return Double.compare(this.estimatedScore, other.estimatedScore);</b>
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    public void setPrevious(LngLat node) {
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        previous = node;</b>
+<i class="no-highlight">62</i>&nbsp;    }
+<i class="no-highlight">63</i>&nbsp;    public void setRouteScore(double newRouteScore) {
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        routeScore = newRouteScore;</b>
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;    public void setEstimatedScore(double newEstimateScore) {
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        estimatedScore = newEstimateScore;</b>
+<i class="no-highlight">68</i>&nbsp;    }
+<i class="no-highlight">69</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-16 18:18</div>
+</div>
+</body>
+</html>

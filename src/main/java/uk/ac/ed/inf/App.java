@@ -17,19 +17,8 @@ import java.util.*;
 
 /**
  * Main class - startpoint of application
- *
- *
- * ross points
- * - possible easier way to make files and directories!
- *
- * - maybe pull URL into a function?
- * - line 107 for loop can maybe be done in a stream
- * - 3 different file creation methods
- * - account for dates w/ no orders
- * - do central area checks
- * - make sure to just return null in the case that an order has no valid path instead of throwing an exception
  */
-public class App 
+public class App
 {
     private static ArrayList<Order> orders = new ArrayList<>();
     private static ArrayList<Order> ordersAll;

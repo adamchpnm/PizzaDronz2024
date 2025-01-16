@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FileCreator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">uk.ac.ed.inf.IO</a>
+</div>
+
+<h1>Coverage Summary for Class: FileCreator (uk.ac.ed.inf.IO)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FileCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package uk.ac.ed.inf.IO;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.core.Version;
+<i class="no-highlight">4</i>&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+<i class="no-highlight">5</i>&nbsp;import com.fasterxml.jackson.databind.SerializationFeature;
+<i class="no-highlight">6</i>&nbsp;import com.fasterxml.jackson.databind.module.SimpleModule;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import org.geojson.Geometry;
+<i class="no-highlight">9</i>&nbsp;import org.geojson.Feature;
+<i class="no-highlight">10</i>&nbsp;import org.geojson.FeatureCollection;
+<i class="no-highlight">11</i>&nbsp;import org.geojson.LineString;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import uk.ac.ed.inf.Pathing.Move;
+<i class="no-highlight">14</i>&nbsp;import uk.ac.ed.inf.ilp.data.LngLat;
+<i class="no-highlight">15</i>&nbsp;import uk.ac.ed.inf.ilp.data.Order;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;import java.io.File;
+<i class="no-highlight">18</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">19</i>&nbsp;import java.nio.file.Path;
+<i class="no-highlight">20</i>&nbsp;import java.nio.file.Paths;
+<i class="no-highlight">21</i>&nbsp;import java.time.LocalDate;
+<i class="no-highlight">22</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">23</i>&nbsp;import java.util.List;
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;/**
+<i class="no-highlight">26</i>&nbsp; * Class for file creation, serialization and logging
+<i class="no-highlight">27</i>&nbsp; */
+<i class="no-highlight">28</i>&nbsp;public class FileCreator {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    private final ObjectMapper mapper = new ObjectMapper();</b>
+<i class="no-highlight">30</i>&nbsp;    private final String orderDate;
+<i class="no-highlight">31</i>&nbsp;    private String basePath;
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    /**
+<i class="no-highlight">34</i>&nbsp;     * Parameterised constructor- will create directory to write desired files to and load in necessary modules for
+<i class="no-highlight">35</i>&nbsp;     * the object mapper
+<i class="no-highlight">36</i>&nbsp;     * @param date = date of orders processed
+<i class="no-highlight">37</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public FileCreator(LocalDate date){</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        orderDate = date.toString();</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        File temp = new File(System.getProperty(&quot;user.dir&quot;));</b>
+<i class="no-highlight">41</i>&nbsp;        //Will write to outside target file when ran by jar so it is in main directory of project
+<i class="no-highlight">42</i>&nbsp;//        basePath = temp.getParentFile().toString().concat(&quot;\\resultfiles&quot;);
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        basePath = temp.toString().concat(&quot;\\resultfiles&quot;);</b>
+<i class="no-highlight">44</i>&nbsp;//        basePath = &quot;\\resultfiles&quot;;
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        File resultsDir = new File(basePath);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        if (!resultsDir.exists()){resultsDir.mkdirs();}</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;        //Load custom serializer as a module for the object mapper; will allow mapper to serialise Orders as Deliveries
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        SimpleModule module = new SimpleModule(&quot;CustomDeliverySerializer&quot;, new Version(1, 0, 0, null, null, null));</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        module.addSerializer(Order.class, new CustomDeliverySerializer());</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        mapper.registerModule(module);</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        mapper.enable(SerializationFeature.INDENT_OUTPUT);</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;    /**
+<i class="no-highlight">55</i>&nbsp;     * Overloaded method - will serialize orders into deliveries and write to the deliveries file
+<i class="no-highlight">56</i>&nbsp;     * @param deliveries = list of all processed orders to be logged as deliveries
+<i class="no-highlight">57</i>&nbsp;     */
+<i class="no-highlight">58</i>&nbsp;    public void createFile(ArrayList&lt;Order&gt; deliveries){
+<i class="no-highlight">59</i>&nbsp;        //Mapper will serialise array of orders into deliveries in json  and write to the file
+<i class="no-highlight">60</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            mapper.writeValue(new File(basePath.concat(&quot;\\deliveries-&quot; + orderDate + &quot;.json&quot;)), deliveries);</b>
+<i class="no-highlight">62</i>&nbsp;
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        } catch (IOException e) {System.err.println(&quot;Failed to write deliveries file&quot;);}}</b>
+<i class="no-highlight">64</i>&nbsp;    /**
+<i class="no-highlight">65</i>&nbsp;     * Overloaded method - will serialize moves and write them to the flightpath file
+<i class="no-highlight">66</i>&nbsp;     * @param moves = list of all moves for each order&#39;s flightpath
+<i class="no-highlight">67</i>&nbsp;     */
+<i class="no-highlight">68</i>&nbsp;    public void createFile(List&lt;Move&gt; moves){
+<i class="no-highlight">69</i>&nbsp;        //Mapper serializes array of moves to json and writes to file
+<i class="no-highlight">70</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            mapper.writeValue(new File(basePath.concat(&quot;\\flightpath-&quot; + orderDate + &quot;.json&quot;)), moves);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        } catch (IOException e) {System.err.println(&quot;Failed to write flightpath file&quot;);}}</b>
+<i class="no-highlight">73</i>&nbsp;    /**
+<i class="no-highlight">74</i>&nbsp;     * Overloaded method - will serialize coordinates and write them to the drone file
+<i class="no-highlight">75</i>&nbsp;     * @param droneMoves = list of coordinates for each flightpath of each order
+<i class="no-highlight">76</i>&nbsp;     * @param routeGenerated =  variable to allow method to be overloaded - way to escape java erasure
+<i class="no-highlight">77</i>&nbsp;     */
+<i class="no-highlight">78</i>&nbsp;    public void createFile(List&lt;LngLat&gt; droneMoves, boolean routeGenerated){
+<i class="no-highlight">79</i>&nbsp;        try {
+<i class="no-highlight">80</i>&nbsp;            //Generate a geoJSON necessary features and add coordinates to LineString object to be serialised
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            Feature mainFeature = new Feature();</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;            Geometry droneRoute = new LineString();</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            droneMoves.stream().forEach(p -&gt; droneRoute.add(new double[]{p.lng(),p.lat()}));</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            mainFeature.setGeometry(droneRoute);</b>
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;            //Mapper serializes FeatureCollection and writes to file
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            mapper.writeValue(new File(basePath.concat(&quot;\\drone-&quot; + orderDate + &quot;.geojson&quot;)), new FeatureCollection().add(mainFeature));</b>
+<i class="no-highlight">88</i>&nbsp;
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        } catch (IOException e) { System.err.println(&quot;Failed to write drone file&quot;);}}</b>
+<i class="no-highlight">90</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-16 18:18</div>
+</div>
+</body>
+</html>
