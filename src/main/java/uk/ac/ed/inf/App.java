@@ -70,7 +70,9 @@ public class App
             }
         }
         if (orders.size() == 0){
-            System.err.println("No orders found for specified date. Result files will be empty");
+            System.err.println("No orders found for specified date ("+orderDate+"). Result files will be empty");
+        } else {
+            System.out.println("Orders recieved for: " + orderDate);
         }
         //Instantiate file creator with given order date
         FileCreator fileGenerator = new FileCreator(orderDate);

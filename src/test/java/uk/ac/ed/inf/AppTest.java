@@ -1,6 +1,12 @@
 package uk.ac.ed.inf;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -15,22 +21,29 @@ public class AppTest
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
+//    remove comment and run to run all tests at once
     @Test
     public void everythingWorks() throws Exception {
         System.out.println(ANSI_RESET + "Running all unit tests");
-        allTestsPass();
+        allUnitTestsPass();
         System.out.println("----------------------------------\n" + ANSI_RESET + "Running all system tests\n"+ ANSI_GREEN + "----------------------------------");
-        appEmpty();
-        appRuns();
+        runAllSystemTests();
         System.out.println(ANSI_GREEN + "\nAPP RUNS SUCCESSFULLY\n" + "----------------------------------\n"+ ANSI_RESET + "\nALL TESTS PASS");
-
     }
 
     @Test
-    public void appRuns() throws Exception {
+    public void runAllSystemTests() throws Exception {
+        EmptyDaySystemTest();
+        NormalDaySystemTest();
+        SystemLevelErrorTestBADURL();
+        SystemLevelErrorTestDisconnectURL();
+    }
+
+    @RepeatedTest(10)
+    public void NormalDaySystemTest() throws Exception {
         //normal day
         System.out.println("Checking app runs normally:" + ANSI_BLACK);
-        String[] args = { "2025-01-20", "https://ilp-rest-2024.azurewebsites.net/"};
+        String[] args = { generateRandomDayAfter().toString(), "https://ilp-rest-2024.azurewebsites.net/"};
         long start = System.currentTimeMillis();
         App.main(args);
         long finish = System.currentTimeMillis();
@@ -39,10 +52,10 @@ public class AppTest
         assertTrue(true);
     }
 
-    @Test
-    public void appEmpty() throws Exception{
+    @RepeatedTest(10)
+    public void EmptyDaySystemTest() throws Exception{
         System.out.println("Checking app runs with empty day:" + ANSI_BLACK);
-        String[] empty = new String[]{"2025-01-01", "https://ilp-rest-2024.azurewebsites.net/"};
+        String[] empty = new String[]{generateRandomDayBefore().toString(), "https://ilp-rest-2024.azurewebsites.net/"};
         long start = System.currentTimeMillis();
         App.main(empty);
         long finish = System.currentTimeMillis();
@@ -52,7 +65,35 @@ public class AppTest
     }
 
     @Test
-    public void allTestsPass() throws Exception {
+    public void SystemLevelErrorTestBADURL(){
+        System.out.println("Checking app throws proper error:" + ANSI_BLACK);
+        String[] bad = new String[]{generateRandomDayAfter().toString(), "BADURLINPUT"};
+        long start = System.currentTimeMillis();
+        Exception exception = assertThrows(Exception.class, () -> App.main(bad));
+        String expectedMessage = "Invalid URL provided";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
+        System.out.println(ANSI_BLUE+"Error thrown and returned in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
+    }
+
+    @Test
+    public void SystemLevelErrorTestDisconnectURL(){
+        System.out.println("Checking app throws proper error:" + ANSI_BLACK);
+        String[] bad = new String[]{generateRandomDayAfter().toString(), "https://gogogoogogogog.com/"};
+        long start = System.currentTimeMillis();
+        Exception exception = assertThrows(Exception.class, () -> App.main(bad));
+        String expectedMessage = "Invalid URL entered - cannot be connected to";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
+        System.out.println(ANSI_BLUE+"Error throw and returned in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
+    }
+
+    @Test
+    public void allUnitTestsPass() throws Exception {
         System.out.println(ANSI_PURPLE + "----------------------------------");
         LngLatHandlingTests lngLatHandlingTests = new LngLatHandlingTests();
         lngLatHandlingTests.allTestsPass();
@@ -66,6 +107,23 @@ public class AppTest
         inputHandlerTests.allTestsPass();
         RetrieverTests retrieverTests = new RetrieverTests();
         retrieverTests.allTestsPass();
+    }
+
+    public static LocalDate generateRandomDayAfter() {
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.plusDays(25);
+        return generateRandomDay(start, end);
+    }
+
+    public static LocalDate generateRandomDayBefore() {
+        LocalDate end = LocalDate.now().minusDays(1);
+        LocalDate start = end.minusDays(25);
+        return generateRandomDay(start, end);
+    }
+
+    public static LocalDate generateRandomDay(LocalDate start, LocalDate end) {
+        long days = ChronoUnit.DAYS.between(start, end);
+        return start.plusDays(new Random().nextInt((int) days + 1));
     }
 
 

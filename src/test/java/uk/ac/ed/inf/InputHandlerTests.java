@@ -11,6 +11,7 @@ public class InputHandlerTests {
         normalArgument();
         noArguments();
         oneArgument();
+        tooManyArgument();
         incorrectDate();
         incorrectURL();
     }
@@ -39,6 +40,17 @@ public class InputHandlerTests {
         System.out.println("Checking one argument input:");
         String[] oneArg = new String[]{"2025-01-20"};
         Exception exception = assertThrows(Exception.class, () -> new InputHandler(oneArg));
+        String expectedMessage = "Incorrect number of arguments passed";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+        System.out.println("Pass\n");
+    }
+
+    @Test
+    public void tooManyArgument(){
+        System.out.println("Checking three argument input:");
+        String[] threeArg = new String[]{"2025-01-20","2025-01-20","2025-01-20"};
+        Exception exception = assertThrows(Exception.class, () -> new InputHandler(threeArg));
         String expectedMessage = "Incorrect number of arguments passed";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
