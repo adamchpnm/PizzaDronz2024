@@ -22,7 +22,7 @@ public class AppTest
     public static final String ANSI_PURPLE = "\u001B[35m";
 
 //    remove comment and run to run all tests at once
-    @Test
+//    @Test
     public void everythingWorks() throws Exception {
         System.out.println(ANSI_RESET + "Running all unit tests");
         allUnitTestsPass();
@@ -49,7 +49,7 @@ public class AppTest
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         System.out.println(ANSI_BLUE+"Complete app run through in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
-        assertTrue(true);
+        assertTrue(timeElapsed < 60000);
     }
 
     @RepeatedTest(10)
@@ -61,7 +61,7 @@ public class AppTest
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         System.out.println(ANSI_BLUE+"Complete app run through in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
-        assertTrue(true);
+        assertTrue(timeElapsed < 60000);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class AppTest
         System.out.println(ANSI_BLUE+"Error throw and returned in " + timeElapsed + "ms"+ANSI_GREEN+"\n----------------------------------");
     }
 
-    @Test
+//    @Test
     public void allUnitTestsPass() throws Exception {
         System.out.println(ANSI_PURPLE + "----------------------------------");
         LngLatHandlingTests lngLatHandlingTests = new LngLatHandlingTests();
